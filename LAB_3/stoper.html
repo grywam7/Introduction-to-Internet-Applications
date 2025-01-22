@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>lab 3 - stoper</title>
+  </head>
+
+  <body>
+    <h1>Stoper</h1>
+    <h2>
+      <div id="stoper">0s</div>
+    </h2>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+
+    <script>
+      const stoper = document.getElementById("stoper");
+      const start = document.getElementById("start");
+      const stop = document.getElementById("stop");
+      const reset = document.getElementById("reset");
+
+      let time = 0;
+      let interval;
+
+      function startStoper() {
+        interval = setInterval(() => {
+          time++;
+          const minutes = Math.floor(time / 60);
+          const seconds = time % 60;
+          if (minutes == 0) {
+            stoper.textContent = `${seconds}s`;
+          } else {
+            stoper.textContent = `${minutes}min ${seconds}s`;
+          }
+        }, 1000);
+      }
+
+      function stopStoper() {
+        clearInterval(interval);
+      }
+
+      function resetStoper() {
+        clearInterval(interval);
+        time = 0;
+        stoper.textContent = "0s";
+      }
+
+      start.addEventListener("click", startStoper);
+      stop.addEventListener("click", stopStoper);
+      reset.addEventListener("click", resetStoper);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista Produktów</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding-left: 10px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      img {
+        max-width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Lista Produktów</h1>
+
+    <div id="controls">
+      <input
+        type="text"
+        id="filterInput"
+        placeholder="Wpisz frazę do filtrowania"
+      />
+      <select id="sortSelect">
+        <option value="original">Oryginalna kolejność</option>
+        <option value="asc">Rosnąco (A-Z)</option>
+        <option value="desc">Malejąco (Z-A)</option>
+      </select>
+    </div>
+
+    <table id="productsTable">
+      <thead>
+        <tr>
+          <th>Zdjęcie</th>
+          <th>Tytuł</th>
+          <th>Opis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Zawartość tabelki -->
+      </tbody>
+    </table>
+
+    <script src="use_api.js"></script>
+  </body>
+</html>

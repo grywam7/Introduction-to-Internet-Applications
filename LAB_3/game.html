@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple JS Game</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #333;
+      }
+
+      canvas {
+        border: 1px solid #fff;
+        display: block;
+      }
+
+      #gameOverPopup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        z-index: 1000;
+      }
+
+      #gameOverPopup button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="basedMusic" src="Background-Music.mp4"></audio>
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="overlay"></div>
+    <div id="gameOverPopup">
+      <h2>Game Over!</h2>
+      <button id="playAgainButton">Play Again</button>
+      <audio id="sadMusic" src="sad-music.mp3"></audio>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = 1000;
+      canvas.height = 600;
+
+      const backgroundImage = new Image();
+      const crossImage = new Image();
+      const enemyImage = new Image();
+      const redHeartImage = new Image();
+      const blackHeartImage = new Image();
+
+      backgroundImage.src = "board-bg.jpg";
+      crossImage.src = "aim.png";
+      enemyImage.src = "walkingdead.png";
+      redHeartImage.src = "full_heart.png";
+      blackHeartImage.src = "empty_heart.png";
+
+      let playerX = canvas.width / 2;
+      let playerY = canvas.height / 2;
+      const playerSize = 120;
+      let enemies = [];
+      const enemyFrames = 10;
+      let frameWidth;
+      let frameIndex = 0;
+      const frameInterval = 100;
+      let lastFrameTime = 0;
+      let points = 100;
+      let hp = 3;
+
+      canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        playerX = e.clientX - rect.left - playerSize / 2;
+        playerY = e.clientY - rect.top - playerSize / 2;
+      });
+
+      canvas.addEventListener("click", (e) => {
+        if (points <= 0) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+
+        let hit = false;
+        for (let i = 0; i < enemies.length; i++) {
+          const enemy = enemies[i];
+          if (
+            clickX >= enemy.x &&
+            clickX <= enemy.x + enemy.size &&
+            clickY >= enemy.y &&
+            clickY <= enemy.y + enemy.size
+          ) {
+            document.getElementById("basedMusic").play();
+            enemies.splice(i, 1);
+            points += 20;
+            hit = true;
+            break;
+          }
+        }
+
+        if (!hit) {
+          points -= 5;
+        }
+
+        if (points < 0) {
+          points = 0; // Ensure points do not go below 0
+        }
+      });
+
+      // Function to draw points meter
+      function drawPoints() {
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "right";
+        ctx.fillText(points.toString().padStart(5, "0"), canvas.width - 20, 40);
+      }
+
+      // Function to draw HP meter
+      function drawHP() {
+        const heartSize = 40;
+        for (let i = 0; i < 3; i++) {
+          if (i < hp) {
+            ctx.drawImage(
+              redHeartImage,
+              20 + i * (heartSize + 10),
+              20,
+              heartSize,
+              heartSize
+            );
+          } else {
+            ctx.drawImage(
+              blackHeartImage,
+              20 + i * (heartSize + 10),
+              20,
+              heartSize,
+              heartSize
+            );
+          }
+        }
+      }
+
+      function showGameOverPopup() {
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("gameOverPopup").style.display = "block";
+        document.getElementById("basedMusic").pause();
+        document.getElementById("sadMusic").play();
+      }
+
+      function hideGameOverPopup() {
+        document.getElementById("sadMusic").pause();
+        document.getElementById("basedMusic").play();
+        document.getElementById("sadMusic").currentTime = 0;
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("gameOverPopup").style.display = "none";
+      }
+
+      document
+        .getElementById("playAgainButton")
+        .addEventListener("click", function () {
+          hideGameOverPopup();
+          resetGame();
+        });
+
+      function resetGame() {
+        hp = 3;
+        points = 100;
+        enemies = [];
+        spawnEnemy();
+        requestAnimationFrame(gameLoop);
+      }
+
+      function spawnEnemy() {
+        const enemySize = Math.random() * (250 - 100) + 100;
+        const enemyY = Math.random() * (canvas.height - enemySize);
+        const enemySpeed = Math.random() * (9 - 3) + 3;
+        enemies.push({
+          x: canvas.width,
+          y: enemyY,
+          speed: enemySpeed,
+          size: enemySize,
+        });
+        const nextSpawnTime = Math.random() * (2000 - 300) + 300;
+        setTimeout(spawnEnemy, nextSpawnTime);
+      }
+
+      function gameLoop(timestamp) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(crossImage, playerX, playerY, playerSize, playerSize);
+
+        for (let i = 0; i < enemies.length; i++) {
+          enemies[i].x -= enemies[i].speed;
+          ctx.drawImage(
+            enemyImage,
+            frameIndex * frameWidth,
+            0,
+            frameWidth,
+            enemyImage.height,
+            enemies[i].x,
+            enemies[i].y,
+            enemies[i].size,
+            enemies[i].size
+          );
+        }
+
+        for (let i = enemies.length - 1; i >= 0; i--) {
+          if (enemies[i].x + enemies[i].size < 0) {
+            enemies.splice(i, 1);
+            hp -= 1;
+            if (hp <= 0) {
+              showGameOverPopup();
+              return;
+            }
+          }
+        }
+
+        if (timestamp - lastFrameTime > frameInterval) {
+          frameIndex = (frameIndex + 1) % enemyFrames;
+          lastFrameTime = timestamp;
+        }
+
+        drawPoints();
+        drawHP();
+
+        requestAnimationFrame(gameLoop);
+      }
+
+      backgroundImage.onload = function () {
+        crossImage.onload = function () {
+          enemyImage.onload = function () {
+            redHeartImage.onload = function () {
+              blackHeartImage.onload = function () {
+                frameWidth = enemyImage.width / enemyFrames;
+                gameLoop(0);
+                spawnEnemy();
+              };
+            };
+          };
+        };
+      };
+    </script>
+  </body>
+</html>
