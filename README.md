@@ -79,6 +79,13 @@ src/
 
 ---
 
+## 👥 Autorzy
+
+- **Filip Żołnierczyk**
+- **Stanisław Brzozowski**
+
+---
+
 ## 📜 Licencja
 
 Ten projekt został stworzony w celach edukacyjnych i nie jest przeznaczony do użytku komercyjnego. Możesz go używać i modyfikować zgodnie z potrzebami.
