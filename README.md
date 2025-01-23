@@ -18,6 +18,11 @@ Aby uruchomić projekt lokalnie, wykonaj poniższe kroki:
    cd unsuspicious-shop
    npm run dev
    ```
+1.1 **Pobież FONT AVESOME (ikonki)**
+   ```bash
+   npm install @fortawesome/fontawesome-free
+   ```
+
 2. **Otwórz aplikację w przeglądarce:**
    http://localhost:5173
 
