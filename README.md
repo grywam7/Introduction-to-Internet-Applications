@@ -31,13 +31,23 @@ Aby uruchomić projekt lokalnie, wykonaj poniższe kroki:
 - **Vite** – Narzędzie do budowania i uruchamiania aplikacji React.
 
 ### **Zarządzanie stanem:**
-- **Context API** – Do zarządzania stanem aplikacji, w tym koszykiem, opiniami i użytkownikami.
+- **Context API** – Używane do zarządzania stanem aplikacji w następujących miejscach:
+  - **Koszyk:** Przechowywanie informacji o produktach dodanych do koszyka oraz ich ilości. 
+    - Plik: `src/context/CartContext.tsx`.
+    - Funkcjonalność: Dodawanie/usuwanie produktów, podsumowanie koszyka.
+  - **Opinie:** Przechowywanie opinii użytkowników o produktach.
+    - Plik: `src/context/ReviewContext.tsx`.
+    - Funkcjonalność: Dodawanie opinii i ich filtrowanie według produktu.
+  - **Uwierzytelnienie:** Przechowywanie informacji o zalogowanym użytkowniku.
+    - Plik: `src/context/AuthContext.tsx`.
+    - Funkcjonalność: Logowanie, rejestracja, wylogowanie.
 
 ### **Mockowanie backendu:**
-- Dane aplikacji, takie jak produkty i użytkownicy, są przechowywane lokalnie:
-  - Produkty: w pliku `data/Products.ts`
-  - Użytkownicy: w pliku `data/Users.ts`
-- LocalStorage jest używany do symulowania przechowywania danych użytkowników i koszyka.
+- **LocalStorage** – Używane jako symulowana baza danych w przeglądarce. Wszystkie operacje (np. dodawanie użytkowników, zarządzanie koszykiem) są zapisywane w `LocalStorage`.
+  - **Gdzie jest używane?**
+    - Przechowywanie zarejestrowanych użytkowników (`AuthContext`).
+    - Przechowywanie danych koszyka (`CartContext`).
+    - Przy starcie aplikacji dane są ładowane z `LocalStorage`, aby umożliwić kontynuację sesji.
 
 ### **Styling:**
 - **CSS (Custom styles)** – Prosty CSS używany w komponentach aplikacji.
