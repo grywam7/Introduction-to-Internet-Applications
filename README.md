@@ -72,9 +72,11 @@ src/
 ## 📚 Funkcjonalności
 
 - **Przeglądanie produktów** – Lista produktów z możliwością filtrowania po nazwie.
-- **Koszyk** – Dodawanie produktów do koszyka z opcją ustawienia ilości.
+- **Szczegóły produktów** - Osobna strona dla każdego produktu, zawierająca szczegóły i opinie.
+- **Koszyk** – Dodawanie produktów do koszyka, z opcją ustawienia ilości.
+- **Koszyk** - Zliczanie ceny za zakupy, możliwość usuwania produktów z koszyka.
 - **Opinie** – Możliwość dodawania opinii z oceną w gwiazdkach (jedna opinia na użytkownika).
-- **Logowanie i rejestracja** – Obsługa użytkowników z mockowanych danych.
+- **Logowanie i rejestracja** – Obsługa użytkowników z mockowanych danych, oraz możliwość stworzenia nowego konta.
 - **Historia zamówień** – Przeglądanie zamówień i pobieranie ich w formacie JSON.
 
 ---
