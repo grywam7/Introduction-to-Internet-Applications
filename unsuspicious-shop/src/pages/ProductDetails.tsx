@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { allProducts } from '../data/Products'; // Import danych produktów
 import { useReview } from '../context/ReviewContext'; // Import kontekstu opinii
 import { useAuth } from '../context/AuthContext'; // Import kontekstu uwierzytelnienia
@@ -7,24 +7,28 @@ import { useCart } from '../context/CartContext'; // Import kontekstu koszyka
 
 const ProductDetails: React.FC = () => {
   const { productId } = useParams();
-  const { reviews, addReview, hasReviewed } = useReview(); // Pobierz opinie i funkcję dodawania opinii
-  const { user } = useAuth(); // Pobierz zalogowanego użytkownika
-  const { addToCart } = useCart(); // Pobierz funkcję dodawania do koszyka
+  const { reviews, addReview, hasReviewed } = useReview();
+  const { user } = useAuth();
+  const { addToCart } = useCart();
   const [reviewContent, setReviewContent] = useState('');
-  const [email, setEmail] = useState(user?.username || ''); // Domyślnie e-mail użytkownika
-  const [rating, setRating] = useState<number | null>(null); // Ocena w gwiazdkach
-  const [quantity, setQuantity] = useState(1); // Stan dla ilości produktów do koszyka
+  const [email, setEmail] = useState(user?.username || '');
+  const [rating, setRating] = useState<number | null>(null);
+  const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState<string | null>(null);
 
-  // Znajdź produkt w tablicy
   const product = allProducts.find((item) => item.id === Number(productId));
 
   if (!product) {
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
         <h1>Nie znaleziono produktu</h1>
-        <p>Brak produktu o ID {productId}</p>
-        <Link to="/">← Wróć na stronę główną</Link>
       </div>
     );
   }
@@ -33,7 +37,7 @@ const ProductDetails: React.FC = () => {
     if (quantity > 0) {
       addToCart(product, quantity);
       alert(`${quantity} sztuk produktu "${product.name}" dodano do koszyka!`);
-      setQuantity(1); // Zresetuj ilość
+      setQuantity(1);
     } else {
       alert('Wprowadź poprawną ilość!');
     }
@@ -59,86 +63,119 @@ const ProductDetails: React.FC = () => {
     setError(null);
   };
 
-  // Filtruj opinie dla tego produktu
   const productReviews = reviews.filter((review) => review.productId === product.id);
 
   return (
-    <div style={{ margin: '1rem' }}>
-      <h1>{product.name}</h1>
+    <div
+      style={{
+        maxWidth: '800px',
+        margin: '2rem auto',
+        padding: '1.5rem',
+        borderRadius: '8px',
+        background: '#fff',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <h1 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>{product.name}</h1>
 
       {product.image && (
         <img
           src={product.image}
           alt={product.name}
-          style={{ maxWidth: '300px', display: 'block', margin: '1rem 0' }}
+          style={{
+            width: '100%',
+            maxHeight: '300px',
+            objectFit: 'cover',
+            borderRadius: '8px',
+            marginBottom: '1.5rem',
+          }}
         />
       )}
 
-      <p>
-        <strong>Cena:</strong> {product.price} zł
-      </p>
-      <p>
-        <strong>Koszt:</strong> {product.cost} zł
-      </p>
-      <p>
-        <strong>Ryzyko zgonu (0-10):</strong> {product.death}
-      </p>
-      <p>
-        <strong>Szacowane ofiary:</strong> {product.kills}
-      </p>
-      <p>
-        <strong>Szansa na sukces (0-10):</strong> {10 - product.interception}
-      </p>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginBottom: '1.5rem',
+        }}
+      >
+        <div>
+          <p>
+            <strong>Cena:</strong> {product.price} zł
+          </p>
+          <p>
+            <strong>Koszt:</strong> {product.cost} zł
+          </p>
+          <p>
+            <strong>Ryzyko zgonu (0-10):</strong> {product.death}
+          </p>
+          <p>
+            <strong>Szacowane ofiary:</strong> {product.kills}
+          </p>
+          <p>
+            <strong>Szansa na sukces (0-10):</strong> {10 - product.interception}
+          </p>
+        </div>
+      </div>
 
       <h3>Opis</h3>
-      <p>{product.description}</p>
+      <p style={{ marginBottom: '1.5rem' }}>{product.description}</p>
 
       <h3>Szczegóły</h3>
-      <p>{product.details}</p>
+      <p style={{ marginBottom: '1.5rem' }}>{product.details}</p>
 
       <h3>Przykłady</h3>
-      <ul>
+      <ul style={{ marginBottom: '1.5rem' }}>
         {product.examples.map((example, index) => (
           <li key={index}>{example}</li>
         ))}
       </ul>
 
-      {/* Dodawanie do koszyka */}
-      <div style={{ marginTop: '2rem' }}>
+      <div style={{ marginBottom: '2rem' }}>
         <h3>Dodaj do koszyka</h3>
-        <label>
-          Ilość:
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '0.5rem' }}>
+          <label style={{ marginRight: '1rem' }}>Ilość:</label>
           <input
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
             min="1"
-            style={{ marginLeft: '10px', width: '60px' }}
+            style={{
+              width: '60px',
+              marginRight: '1rem',
+              padding: '0.5rem',
+              borderRadius: '4px',
+              border: '1px solid #ddd',
+            }}
           />
-        </label>
-        <button
-          onClick={handleAddToCart}
-          style={{
-            marginLeft: '10px',
-            padding: '0.5rem 1rem',
-            background: '#007BFF',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          Dodaj do koszyka
-        </button>
+          <button
+            onClick={handleAddToCart}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0.5rem 1rem',
+              background: '#28a745',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              transition: 'background 0.3s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#1e7e34')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#28a745')}
+          >
+            <i className="fas fa-shopping-cart" style={{ marginRight: '0.5rem' }}></i>
+            Dodaj do koszyka
+          </button>
+        </div>
       </div>
 
-      {/* Opinie */}
-      <div style={{ marginTop: '2rem' }}>
+      <div>
         <h3>Opinie</h3>
         {productReviews.length === 0 ? (
           <p>Brak opinii. Bądź pierwszą osobą, która doda opinię!</p>
         ) : (
-          <ul>
+          <ul style={{ marginBottom: '1.5rem' }}>
             {productReviews.map((review, index) => (
               <li key={index}>
                 <strong>{review.author}</strong> ({review.rating}/5): {review.content}
@@ -147,11 +184,12 @@ const ProductDetails: React.FC = () => {
           </ul>
         )}
 
-        {/* Formularz dodawania opinii */}
         {!hasReviewed(product.id, email) && (
-          <form onSubmit={handleAddReview} style={{ marginTop: '1rem' }}>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div>
+          <form onSubmit={handleAddReview}>
+            {error && (
+              <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>
+            )}
+            <div style={{ marginBottom: '1rem' }}>
               <label>
                 Twój e-mail:
                 <input
@@ -159,22 +197,35 @@ const ProductDetails: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  style={{ width: '100%', marginBottom: '0.5rem' }}
+                  style={{
+                    width: '100%',
+                    padding: '0.5rem',
+                    marginTop: '0.5rem',
+                    borderRadius: '4px',
+                    border: '1px solid #ddd',
+                  }}
                 />
               </label>
             </div>
-            <div>
+            <div style={{ marginBottom: '1rem' }}>
               <label>
                 Treść opinii:
                 <textarea
                   value={reviewContent}
                   onChange={(e) => setReviewContent(e.target.value)}
                   required
-                  style={{ width: '100%', height: '80px', marginBottom: '0.5rem' }}
+                  style={{
+                    width: '100%',
+                    height: '80px',
+                    marginTop: '0.5rem',
+                    padding: '0.5rem',
+                    borderRadius: '4px',
+                    border: '1px solid #ddd',
+                  }}
                 />
               </label>
             </div>
-            <div>
+            <div style={{ marginBottom: '1rem' }}>
               <label>
                 Ocena (1-5):
                 <input
@@ -184,18 +235,26 @@ const ProductDetails: React.FC = () => {
                   min="1"
                   max="5"
                   required
-                  style={{ width: '100%', marginBottom: '0.5rem' }}
+                  style={{
+                    width: '100%',
+                    padding: '0.5rem',
+                    marginTop: '0.5rem',
+                    borderRadius: '4px',
+                    border: '1px solid #ddd',
+                  }}
                 />
               </label>
             </div>
             <button
               type="submit"
               style={{
-                padding: '0.5rem 1rem',
+                width: '100%',
+                padding: '0.75rem',
                 background: '#007BFF',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '4px',
+                fontWeight: 'bold',
                 cursor: 'pointer',
               }}
             >

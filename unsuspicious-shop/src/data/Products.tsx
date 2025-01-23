@@ -26,7 +26,8 @@ export const allProducts: Product[] = [
     examples: ["Atak na Columbine High School (1999)", "Atak w Bataclan, Paryż (2015)"],      
     interception: 7,
     death: 3,
-    kills: 40
+    kills: 40,
+    icon: "/icon_1.jpg",
   },
   {
     id: 2,
@@ -38,7 +39,8 @@ export const allProducts: Product[] = [
     examples: ["Zamachy w Madrycie (2004)", "Atak na metro w Londynie (2005)"],  
     interception: 5,
     death: 2,
-    kills: 300
+    kills: 300,
+    icon: "/icon_2.png",
   },
   {
     id: 3,
@@ -50,7 +52,8 @@ export const allProducts: Product[] = [
     examples: ["Zamach na Oklahoma City (1995)", "Atak na hotel Marriott w Islamabadzie (2008)"],
     interception: 6,
     death: 2,
-    kills: 250
+    kills: 250,
+    icon: "/icon_3.jpg",
   },
   {
     id: 4, 
@@ -62,7 +65,8 @@ export const allProducts: Product[] = [
     examples: ["Ataki w Londynie (2005)", "Atak na teatr Dubrowka w Moskwie (2002)"],  
     interception: 4,
     death: 10,
-    kills: 30
+    kills: 30,
+    icon: "/icon_4.png",
   },
   {
     id: 5,
@@ -74,7 +78,8 @@ export const allProducts: Product[] = [
     examples: ["Atak na ambasadę USA w Nairobi (1998)", "Zamach w Bejrucie (1983)"],  
     interception: 6,
     death: 3,
-    kills: 40
+    kills: 40,
+    icon: "/icon_5.jpg",
   },
   {
     id: 6,
@@ -86,7 +91,8 @@ export const allProducts: Product[] = [
     examples: ["Atak w Oklahoma City (1995)", "Zamach na żołnierzy USA w Bejrucie (1983)"],
     interception: 5,
     death: 5,
-    kills: 80
+    kills: 80,
+    icon: "/icon_6.jpg",
   },
   {
     id: 7,
@@ -98,7 +104,8 @@ export const allProducts: Product[] = [
     examples: ["Atak w tokijskim metrze (1995)", "Atak na Ghouta w Syrii (2013)"],
     interception: 3,
     death: 2,
-    kills: 400
+    kills: 400,
+    icon: "/icon_7.jpg",
   },
   {
     id: 8,
@@ -110,7 +117,8 @@ export const allProducts: Product[] = [
     examples: ["Porwanie samolotu Lufthansa (1977)", "Porwanie lotu TWA 847 (1985)"],
     interception: 7,
     death: 2,
-    kills: 10
+    kills: 10,
+    icon: "/icon_8.jpg",
   },
   {
     id: 9,
@@ -122,6 +130,7 @@ export const allProducts: Product[] = [
     examples: ["Ataki z 11 września 2001 r."],
     interception: 4,
     death: 10,
-    kills: 3000
+    kills: 3000,
+    icon: "/icon_9.jpg",
   }
 ];
