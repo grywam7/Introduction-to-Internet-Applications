@@ -1,0 +1,12 @@
+{
+  "id": 5,
+  "name": "Auto pułapka",
+  "price": 15000,
+  "cost": 10000,
+  "description": "Samochód wypełniony materiałami wybuchowymi jest zdetonowany w pobliżu celu.",
+  "details": "Zwykle wykorzystywany do zaatakowania ambasad, placówek rządowych lub publicznych.",
+  "examples": ["Atak na ambasadę USA w Nairobi (1998)", "Zamach w Bejrucie (1983)"],  
+  "interception": 6,
+  "death": 3,
+  "kills": 40
+}

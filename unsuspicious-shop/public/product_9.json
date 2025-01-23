@@ -1,0 +1,12 @@
+{
+  "id": 9,
+  "name": "Kamikhadze porwanym samolotem",
+  "price": 50000,
+  "cost": 10000,
+  "description": "Porwanie samolotu w celu jego wykorzystania jako broni do zniszczenia budynków.",
+  "details": "Spektakularne i niszczycielskie, planowane z dużym wyprzedzeniem i wsparciem logistycznym.",
+  "examples": ["Ataki z 11 września 2001 r."],
+  "interception": 4,
+  "death": 10,
+  "kills": 3000
+}

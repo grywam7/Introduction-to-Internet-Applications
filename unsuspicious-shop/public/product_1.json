@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "name": "Atak z bronią palną na budynki publiczne",
+  "price": 5000,
+  "cost": 3000,
+  "description": "Zamachowcy otwierają ogień w miejscach publicznych, np. szkołach, lotniskach, lub innych obiektach publicznych.",
+  "details": "Najczęściej stosowany w budynkach o dużym natężeniu ruchu. Atak często kończy się konfrontacją z policją.",
+  "examples": ["Atak na Columbine High School (1999)", "Atak w Bataclan, Paryż (2015)"],
+  "interception": 7,
+  "death": 3,
+  "kills": 40
+}

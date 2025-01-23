@@ -1,0 +1,12 @@
+{
+  "id": 4, 
+  "name": "Kamikhadze z bombą",
+  "price": 10000,
+  "cost": 5000,
+  "description": "Jedna osoba z ładunkiem wybuchowym detonuje się w zatłoczonym miejscu.",
+  "details": "Atak przeprowadzany przez osobę gotową oddać życie dla sprawy, co czyni go bardzo trudnym do powstrzymania.",
+  "examples": ["Ataki w Londynie (2005)", "Atak na teatr Dubrowka w Moskwie (2002)"],  
+  "interception": 4,
+  "death": 10,
+  "kills": 30
+}

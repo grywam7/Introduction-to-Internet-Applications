@@ -1,0 +1,12 @@
+{
+  "id": 2,
+  "name": "Zamach bombowy na sieć pociągów",
+  "price": 15000,
+  "cost": 10000,
+  "description": "Podłożenie bomb w zatłoczonych pociągach lub na dworcach w celu maksymalizacji liczby ofiar.",
+  "details": "Planowany w godzinach szczytu, aby zmaksymalizować straty. Ataki tego typu są trudne do wykrycia z powodu dużej liczby potencjalnych celów.",
+  "examples": ["Zamachy w Madrycie (2004)", "Atak na metro w Londynie (2005)"],  
+  "interception": 5,
+  "death": 2,
+  "kills": 300
+}

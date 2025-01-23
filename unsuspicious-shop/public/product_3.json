@@ -1,0 +1,12 @@
+{
+  "id": 3,
+  "name": "Zamach bombowy na infrastrukturę",
+  "price": 20000,
+  "cost": 15000,
+  "description": "Podłożenie materiałów wybuchowych w kluczowych budynkach, np. hotelach, parlamentach lub kasynach.",
+  "details": "Celem jest zniszczenie infrastruktury, a także zastraszenie populacji.",
+  "examples": ["Zamach na Oklahoma City (1995)", "Atak na hotel Marriott w Islamabadzie (2008)"],
+  "interception": 6,
+  "death": 2,
+  "kills": 250
+}

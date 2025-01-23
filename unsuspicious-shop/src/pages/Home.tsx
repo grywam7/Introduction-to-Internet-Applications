@@ -17,6 +17,23 @@ const Home: React.FC = () => {
         />
       </div>
 
+      <a
+        href="/products.json" // Ścieżka do pliku w folderze public
+        download="products.json" // Nazwa pliku podczas pobierania
+        style={{
+          display: 'inline-block',
+          marginTop: '1rem',
+          padding: '0.5rem 1rem',
+          background: '#007BFF',
+          color: '#fff',
+          textDecoration: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
+      >
+        Pobierz dane produktów
+      </a>
+
       <ProductList searchTerm={searchTerm} />
     </div>
   );

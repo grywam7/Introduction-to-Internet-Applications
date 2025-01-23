@@ -1,0 +1,12 @@
+{
+  "id": 6,
+  "name": "Tir BOMBA",
+  "price": 30000,
+  "cost": 20000,
+  "description": "Ciężarówka wypełniona materiałami wybuchowymi detonowana w celu zniszczenia budynku lub uszkodzenia infrastruktury.",
+  "details": "Wyjątkowo niszczycielski, stosowany w miejscach o wysokiej wartości symbolicznej lub strategicznej.",
+  "examples": ["Atak w Oklahoma City (1995)", "Zamach na żołnierzy USA w Bejrucie (1983)"],
+  "interception": 5,
+  "death": 5,
+  "kills": 80
+}

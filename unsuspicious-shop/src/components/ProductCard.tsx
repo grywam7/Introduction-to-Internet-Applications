@@ -33,7 +33,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         </Link>
         <button
           style={{ marginLeft: '10px' }}
-          onClick={() => addToCart(product)} // Dodaj produkt do koszyka
+          onClick={() => addToCart(product, 1)}
         >
           Dodaj do koszyka
         </button>

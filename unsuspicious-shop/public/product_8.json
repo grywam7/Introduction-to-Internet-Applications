@@ -1,0 +1,12 @@
+{
+  "id": 8,
+  "name": "Przechwycenie samolotu",
+  "price": 20000,
+  "cost": 5000,
+  "description": "Porwanie samolotu w celu uzyskania okupu lub nagłośnienia politycznego.",
+  "details": "Zamachowcy zazwyczaj zmuszają pilotów do zmiany kursu pod groźbą śmierci pasażerów.",
+  "examples": ["Porwanie samolotu Lufthansa (1977)", "Porwanie lotu TWA 847 (1985)"],
+  "interception": 7,
+  "death": 2,
+  "kills": 10
+}

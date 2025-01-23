@@ -1,0 +1,12 @@
+{
+  "id": 7,
+  "name": "Atak gazem bojowym sarin",
+  "price": 50000,
+  "cost": 30000,
+  "description": "Uwolnienie gazu bojowego sarin w zamkniętych przestrzeniach, np. w metrze.",
+  "details": "Ataki chemiczne są rzadkie, ale bardzo trudne do opanowania i wywołują masową panikę.",
+  "examples": ["Atak w tokijskim metrze (1995)", "Atak na Ghouta w Syrii (2013)"],
+  "interception": 3,
+  "death": 2,
+  "kills": 400
+}
